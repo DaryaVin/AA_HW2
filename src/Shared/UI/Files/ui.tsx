@@ -8,17 +8,6 @@ import React, {
 import "./style.scss";
 import { Accept, FileError, FileRejection, useDropzone } from "react-dropzone";
 
-// export interface FilesProps
-//   extends React.InputHTMLAttributes<HTMLInputElement> {
-//   id: string;
-//   type: "file";
-//   label?: string;
-//   required?: boolean;
-//   formats?: string;
-//   max_size?: number;
-//   max_count?: number;
-// }
-
 const fullAcceps: Accept = {
   "image/png": [".png"],
   "image/jpeg": [".jpeg"],
@@ -51,6 +40,8 @@ interface FilesProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   maxSize?: number;
   maxCount?: number;
+  isError?: boolean;
+  onDirty?: (val: boolean) => void;
 }
 const Files = forwardRef(
   (
@@ -61,9 +52,10 @@ const Files = forwardRef(
       fileList,
       setFileList,
       multiple,
-
       maxSize,
       maxCount,
+      onDirty,
+      isError,
       ...props
     }: FilesProps,
     ref
@@ -78,6 +70,7 @@ const Files = forwardRef(
 
     const onDrop = (acceptedFiles: File[]) => {
       setErrorMessage(() => []);
+      if (onDirty) onDirty(true);
 
       const newAcceptedFiles = maxCount
         ? [...acceptedFiles.slice(0, maxCount)]
@@ -142,13 +135,14 @@ const Files = forwardRef(
     };
 
     return (
-      <div className="fileInput_label">
+      <div className={"fileInput_label"}>
         {label}
         <div
           className={
             "fileInput" +
-            (className ? +" " + className : "") +
-            (isDragActive ? " fileInput_dragAndDrop" : "")
+            (className ? " " + className : "") +
+            (isDragActive ? " fileInput_dragAndDrop" : "") +
+            (isError ? " fileInput_isError" : "")
           }
           {...getRootProps()}
         >

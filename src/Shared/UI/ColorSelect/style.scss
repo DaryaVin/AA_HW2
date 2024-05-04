@@ -2,6 +2,7 @@
 
 .selectColor {
   @include paragraph2-bold;
+  width: fit-content;
   .select__optionsSlot {
     width: fit-content;
   }
@@ -85,10 +86,14 @@
   gap: 8px;
 }
 .selectColor__optionItem {
-  // padding: 8px 4px;
+  width: fit-content;
+  height: fit-content;
 }
 .selectColor__optionsLabel {
   position: relative;
+  &:hover {
+    @include hoverShadow;
+  }
 }
 .selectColor__optionsLabel_checked {
   &::after {

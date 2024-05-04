@@ -1,15 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./style.scss";
 import { SelectProps } from "../SelectWithFilter/ui";
 import { Select } from "../Select/ui";
-
-// export interface ColorProps {
-//   id: string;
-//   type: "color";
-//   label?: string;
-//   required?: boolean;
-//   options: string[];
-// }
 
 export const ColorSelect = ({
   options,
@@ -18,14 +10,23 @@ export const ColorSelect = ({
   className,
   value,
   setValue,
+  isError,
+  onDirty,
 }: SelectProps) => {
   const [isShow, setIsShow] = useState<boolean>(false);
+  const [isShowTrueFirst, setIsShowTrueFirst] = useState<boolean>(false);
 
-  // const selectColorRef = useRef<HTMLDivElement>(null);
-  // const infoConteinerRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if (isShow && !isShowTrueFirst) {
+      setIsShowTrueFirst(true);
+    }
+    if (!isShow && isShowTrueFirst && onDirty) {
+      onDirty(true);
+    }
+  }, [isShow]);
 
   const updateValue = (option: string) => {
-    if (multiple) {
+    if (multiple && Array.isArray(value)) {
       if (value.includes(option)) {
         setValue([
           ...value.filter((item) => {
@@ -59,6 +60,7 @@ export const ColorSelect = ({
     <div className="selectColor__mainField">
       <div className={"selectColor__value"}>
         {multiple &&
+          Array.isArray(value) &&
           value.map((val) => {
             return (
               <span
@@ -72,7 +74,7 @@ export const ColorSelect = ({
               </span>
             );
           })}
-        {!multiple && value !== "" && (
+        {!multiple && value !== "" && !Array.isArray(value) && (
           <span
             className={"selectColor__colorItem"}
             style={{
@@ -119,6 +121,10 @@ export const ColorSelect = ({
               style={{
                 backgroundColor: option,
               }}
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === " ") updateValue(option);
+              }}
             >
               <input
                 type={multiple ? "checkbox" : "radio"}
@@ -128,6 +134,7 @@ export const ColorSelect = ({
                   (multiple && value.includes(option)) ||
                   (!multiple && value === option)
                 }
+                tabIndex={-1}
                 onChange={() => {
                   updateValue(option);
                 }}
@@ -150,6 +157,7 @@ export const ColorSelect = ({
         mainFieldSlot={mainFieldSlot}
         optionsSlot={optionsSlot}
         className={"selectColor_select" + (className ? " " + className : "")}
+        isError={isError}
       />
     </div>
   );

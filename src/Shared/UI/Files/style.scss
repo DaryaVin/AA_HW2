@@ -37,6 +37,10 @@
     background: url("./Assets/fileSVGWhite.svg") no-repeat center $PrimaryColor;
   }
 }
+.fileInput_isError {
+  @include inputErrorShadow;
+  background-color: $RedGirlColor;
+}
 .fileInput__welcomeInscription {
   color: $BlackColor;
   margin: 0;

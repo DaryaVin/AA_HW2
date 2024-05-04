@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./style.scss";
-import { Input, ValidationMessage, useValidationFieldForm } from "../../Shared";
+import { useValidationFieldForm } from "../../Hooks/useValidation";
+import { Input } from "../Input/ui";
+import { ValidationMessage } from "../ValidationMessage/ui";
 
 interface InputWithValidationProps {
   id: string;
@@ -13,6 +15,7 @@ interface InputWithValidationProps {
   pattern?: string;
   mask?: string;
   className?: string;
+  setIsValid?: (val: boolean) => void;
 }
 
 export const InputWithValidation = ({
@@ -20,6 +23,7 @@ export const InputWithValidation = ({
   maxlength,
   minlength,
   pattern,
+  setIsValid,
   ...props
 }: InputWithValidationProps) => {
   const [value, setValue] = useState<string>("");
@@ -32,7 +36,9 @@ export const InputWithValidation = ({
       pattern,
     },
   });
-
+  useEffect(() => {
+    if (setIsValid) setIsValid(validation.isValid);
+  }, [validation.isValid]);
   return (
     <div className="inputWithValidation">
       <Input
@@ -43,6 +49,7 @@ export const InputWithValidation = ({
           validation.setIsDirty(true);
         }}
         {...props}
+        isError={validation.isDirty && !validation.isValid}
       />
       <ValidationMessage {...validation} />
     </div>

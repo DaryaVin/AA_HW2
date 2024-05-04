@@ -33,6 +33,7 @@
 .checkbox__field {
   border-color: $PrimaryColor;
   background-color: $PrimaryColor;
+  border: 1px solid $PrimaryColor;
   transition: all 0.3s linear;
   width: 24px;
   height: 24px;
@@ -79,12 +80,6 @@
       display: none;
     }
   }
-  // &:hover:not([aria-disabled="true"]) {
-  //   background-color: $GrayMColor;
-  //   &[aria-checked="true"] {
-  //     background-color: $HoverColor;
-  //   }
-  // }
   &:active:not([aria-disabled="true"]) {
   }
 }

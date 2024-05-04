@@ -41,6 +41,9 @@
     border-color: $BlackColor;
   }
 }
+.select__mainFieldSlot_error {
+  background-color: $RedGirlColor;
+}
 .select__optionsSlot {
   position: absolute;
   top: 100%;
@@ -61,4 +64,8 @@
   100% {
     transform: scaleY(1);
   }
+}
+
+.select__optionsSlot_error {
+  background-color: $RedGirlColor;
 }

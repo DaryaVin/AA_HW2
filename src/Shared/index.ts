@@ -9,6 +9,13 @@ import { SelectWithFilter } from "./UI/SelectWithFilter/ui";
 import { ColorSelect } from "./UI/ColorSelect/ui";
 import { ValidationMessage } from "./UI/ValidationMessage/ui";
 import { useValidationFieldForm } from "./Hooks/useValidation";
+import { InputWithValidation } from "./UI/InputWithValidation/ui";
+import { ColorWithValidation } from "./UI/ColorWithValidation/ui";
+import { CheckboxWithValidation } from "./UI/CheckboxWithValidation/ui";
+import { SelectWithFilterWithValidation } from "./UI/SelectWithFilterWithValidation/ui";
+import { FilesWithValidation } from "./UI/FilesWithValidation/ui";
+
+import { FormJSONType, FieldItem } from "./Models/types";
 
 export {
   Select,
@@ -22,4 +29,11 @@ export {
   ColorSelect,
   ValidationMessage,
   useValidationFieldForm,
+  InputWithValidation,
+  ColorWithValidation,
+  SelectWithFilterWithValidation,
+  CheckboxWithValidation,
+  FilesWithValidation,
 };
+
+export type { FormJSONType, FieldItem };

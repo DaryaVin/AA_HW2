@@ -5,11 +5,7 @@ export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   type?: "password" | "text" | "textarea";
   label?: string;
-  // required?: boolean;
   placeholder?: string;
-  // maxlength?: number;
-  // minlength?: number;
-  // pattern?: string;
   mask?: string;
   className?: string;
   value: string;
@@ -27,8 +23,6 @@ const InputField = forwardRef(
       onChange,
       disabled = false,
       setValue,
-      // mask,
-      // pattern,
       isError,
       ...props
     }: InputProps,

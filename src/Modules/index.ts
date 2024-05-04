@@ -1,3 +1,4 @@
-import { InputWithValidation } from "./InputWithValidation/ui";
+import { ParsingJSONComponent } from "./ParsingJSONComponent/ui";
+import { CreatingForm } from "./CreatingForm/ui";
 
-export { InputWithValidation };
+export { ParsingJSONComponent, CreatingForm };

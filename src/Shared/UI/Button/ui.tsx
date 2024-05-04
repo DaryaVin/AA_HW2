@@ -17,6 +17,7 @@ export const Button = ({
   tag = "button",
   label,
   className,
+  children,
   theme = "withBorder",
   type,
   ...props
@@ -24,6 +25,11 @@ export const Button = ({
   const newClassName =
     "button" + (className ? " " + className : "") + " button_theme_" + theme;
 
+  const content = (
+    <span>
+      {label} {children}
+    </span>
+  );
   return React.createElement(
     tag,
     {
@@ -31,6 +37,6 @@ export const Button = ({
       className: newClassName,
       type: !type && tag === "button" ? "button" : type,
     },
-    label
+    content
   );
 };

@@ -2,28 +2,19 @@ import React, { useEffect, useRef, useState } from "react";
 import "./style.scss";
 import { Select } from "../Select/ui";
 
-interface SelectGeneralProps {
+export interface SelectProps {
   id?: string;
   type?: string;
   label?: string;
   required?: boolean;
   options: string[];
   className?: string;
+  isError?: boolean;
+  onDirty?: (v: boolean) => void;
+  multiple?: boolean;
+  value: string[] | string;
+  setValue: (val: string[] | string) => void;
 }
-
-type SelectSpecProps =
-  | {
-      multiple: true;
-      value: string[];
-      setValue: (val: string[]) => void;
-    }
-  | {
-      multiple?: false;
-      value: string;
-      setValue: (val: string) => void;
-    };
-
-export type SelectProps = SelectGeneralProps & SelectSpecProps;
 
 export const SelectWithFilter = ({
   label,
@@ -31,12 +22,16 @@ export const SelectWithFilter = ({
   options,
   className,
   value,
+  onDirty,
+  isError,
   setValue,
 }: SelectProps) => {
   const [isShow, setIsShow] = useState<boolean>(false);
   const [filterText, setFilterText] = useState<string>("");
   const [isFiterInputInFocus, setIsFiterInputInFocus] =
     useState<boolean>(false);
+
+  const [isShowTrueFirst, setIsShowTrueFirst] = useState<boolean>(false);
 
   const filterInputRef = useRef<HTMLInputElement>(null);
   const infoConteinerRef = useRef<HTMLInputElement>(null);
@@ -47,10 +42,17 @@ export const SelectWithFilter = ({
     } else {
       filterInputRef.current?.blur();
     }
+
+    if (isShow && !isShowTrueFirst) {
+      setIsShowTrueFirst(true);
+    }
+    if (!isShow && isShowTrueFirst && onDirty) {
+      onDirty(true);
+    }
   }, [isShow]);
 
   const updateValue = (option: string) => {
-    if (multiple) {
+    if (multiple && Array.isArray(value)) {
       if (value.includes(option)) {
         setValue([
           ...value.filter((item) => {
@@ -127,6 +129,7 @@ export const SelectWithFilter = ({
           }
         >
           {multiple &&
+            Array.isArray(value) &&
             value.map((val) => {
               return (
                 <span key={val} className="selectWithFilter__valueItem">
@@ -232,6 +235,7 @@ export const SelectWithFilter = ({
       mainFieldSlot={mainFieldSlot}
       optionsSlot={optionsSlot}
       className={className}
+      isError={isError}
     />
   );
 };

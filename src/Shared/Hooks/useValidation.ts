@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 interface ValidatorProps {
-  value: string | string[] | FileList | null | undefined;
+  value: string | string[] | FileList | null | undefined | boolean;
   options: {
     required?: boolean;
     maxlength?: number;
@@ -31,13 +31,10 @@ export const useValidationFieldForm = ({
   const { required, maxlength, minlength, pattern } = options;
 
   let firstValueIsDirty: boolean = false;
-  if (Array.isArray(value)) {
-    firstValueIsDirty = value.reduce((sum, item) => {
-      return sum && !!item;
-    }, true);
+
+  if (value instanceof FileList || Array.isArray(value)) {
+    if (value.length !== 0) firstValueIsDirty = true;
   } else {
-    if (value instanceof FileList && value.length !== 0)
-      firstValueIsDirty = true;
     firstValueIsDirty = !!value;
   }
 
@@ -58,7 +55,13 @@ export const useValidationFieldForm = ({
 
       const validityСheckItem = (item: unknown) => {
         if (required) {
-          if (item === "" || item === undefined || item === null) {
+          if (
+            item === "" ||
+            item === undefined ||
+            item === null ||
+            (Array.isArray(item) && item.length === 0) ||
+            (value instanceof FileList && value.length === 0)
+          ) {
             mess.required = "Это поле должно быть заполнено";
             requiredStatus = false;
           }
@@ -105,7 +108,7 @@ export const useValidationFieldForm = ({
 
       setMessage(mess);
     },
-    Array.isArray(value) ? [...value] : [value]
+    Array.isArray(value) ? [value.length] : [value]
   );
 
   return {
