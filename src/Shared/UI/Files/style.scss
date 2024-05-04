@@ -1,0 +1,123 @@
+@import "./../../Style/generalStyle.scss";
+
+.fileInput_label {
+  @include paragraph2-bold;
+  width: 100%;
+}
+
+.fileInput {
+  transition: all 0.3s linear;
+  @include paragraph2;
+  cursor: pointer;
+  width: 100%;
+  @include defaultShadow;
+  border-radius: 4px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: start;
+  gap: 10px;
+  &:hover {
+    @include hoverShadow;
+  }
+}
+.fileInput_dragAndDrop {
+  font-size: 0;
+  position: relative;
+  &::after {
+    content: "";
+    border-radius: 4px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: $PrimaryColor;
+    background: url("./Assets/fileSVGWhite.svg") no-repeat center $PrimaryColor;
+  }
+}
+.fileInput__welcomeInscription {
+  color: $BlackColor;
+  margin: 0;
+}
+.fileInput__welcomeInscription_spec {
+  color: $PrimaryColor;
+}
+.fileInput__discription {
+  margin: 0;
+  @include paragraph3;
+  color: $GrayColor;
+}
+.fileInput__fileList {
+  list-style-type: none;
+  margin: 0;
+  padding: 0 60px 0 0;
+  width: 100%;
+  position: relative;
+  &::after {
+    content: "";
+    width: 56px;
+    height: 56px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin-top: -28px;
+    border-radius: 50%;
+    background: url("./Assets/fileSVG.svg") no-repeat center $GrayLColor;
+  }
+}
+.fileInput__fileItem {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 0;
+}
+.fileInput__fileItemText {
+  margin: 0;
+}
+.fileInput__fileItemSizeText {
+  padding-left: 5px;
+  color: $GrayColor;
+}
+.fileInput__delFileBtn {
+  background-color: transparent;
+  box-sizing: border-box;
+  border: 0;
+  font-size: 0;
+  position: relative;
+  width: 32px;
+  cursor: pointer;
+  &::after,
+  &::before {
+    content: "";
+    width: 16px;
+    height: 2px;
+    background-color: rgba(196, 196, 196, 1);
+    transform-origin: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -1px;
+    margin-left: -8px;
+  }
+  &::after {
+    transform: rotate(-45deg);
+  }
+  &::before {
+    transform: rotate(45deg);
+  }
+}
+
+.fileInput__erorsList {
+  margin: 0;
+  padding: 0;
+  @include paragraph3;
+  color: $RedColor;
+  list-style-type: none;
+}
+.fileInput__errorItem {
+}

@@ -1,0 +1,122 @@
+@import "./../../Style/generalStyle.scss";
+
+.selectColor {
+  @include paragraph2-bold;
+  .select__optionsSlot {
+    width: fit-content;
+  }
+}
+.selectColor_select {
+  cursor: pointer;
+}
+.selectColor__mainField {
+  display: flex;
+  flex-direction: row;
+  padding: 8px 0 8px 8px;
+  cursor: pointer;
+}
+.selectColor__value {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+.selectColor__colorItem {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  font-size: 0;
+  border: 1px solid $GraySColor;
+}
+.selectColor__colorItem_default {
+  @include paragraph2;
+  font-size: 8px;
+  line-height: 10px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+.selectColor__resetBtn {
+  background-color: transparent;
+  transition: all 0.3s linear;
+  box-sizing: border-box;
+  border: 0;
+  font-size: 0;
+  position: relative;
+  width: 32px;
+  animation: 0.3s resetBtnAppearance linear;
+  &::after,
+  &::before {
+    content: "";
+    width: 16px;
+    height: 2px;
+    background-color: rgba(196, 196, 196, 1);
+    transform-origin: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -1px;
+    margin-left: -8px;
+  }
+  &::after {
+    transform: rotate(-45deg);
+  }
+  &::before {
+    transform: rotate(45deg);
+  }
+}
+@keyframes resetBtnAppearance {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+  100% {
+    width: 32px;
+    opacity: 1;
+  }
+}
+.selectColor__optionList {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+  margin: 0;
+  justify-content: space-between;
+  padding: 8px;
+  gap: 8px;
+}
+.selectColor__optionItem {
+  // padding: 8px 4px;
+}
+.selectColor__optionsLabel {
+  position: relative;
+}
+.selectColor__optionsLabel_checked {
+  &::after {
+    content: "";
+    width: 16px;
+    height: 5px;
+    border-bottom: 2px solid $BlackColor;
+    border-left: 2px solid $BlackColor;
+    position: absolute;
+    right: 1px;
+    top: 16px;
+    transform-origin: center;
+    transform: translateY(-100%) rotate(-45deg);
+  }
+  &::before {
+    content: "";
+    width: 16px;
+    height: 5px;
+    border-bottom: 4px solid $WhiteColor;
+    border-left: 4px solid $WhiteColor;
+    position: absolute;
+    right: 0;
+    top: 17px;
+    transform-origin: center;
+    transform: translateY(-100%) rotate(-45deg);
+  }
+}
+.selectColor__optionsInput {
+  width: 0;
+  height: 0;
+}

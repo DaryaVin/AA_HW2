@@ -1,0 +1,80 @@
+@import "./../../Style/generalStyle.scss";
+
+.button {
+  cursor: pointer;
+  font-family: "Poppins";
+  @include paragraph2;
+  font-weight: 500;
+  font-size: 15px;
+  overflow: visible;
+  padding: 10px 20px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 4px;
+  border-width: 2px;
+  transition: all 0.3s linear;
+  &:disabled {
+    cursor: auto;
+  }
+}
+
+.button_theme_roundWithPlus {
+  border-radius: 50%;
+  font-size: 0;
+  width: 44px;
+  height: 44px;
+  position: relative;
+  &::after,
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: $WhiteColor;
+  }
+  &::before {
+    width: 20px;
+    height: 2px;
+  }
+  &::after {
+    width: 2px;
+    height: 20px;
+  }
+}
+
+.button_theme_fillBcg,
+.button_theme_roundWithPlus {
+  background-color: $PrimaryColor;
+  color: $WhiteColor;
+  border: 2px solid $PrimaryColor;
+  &:disabled {
+    background-color: $DisabledColor;
+    border-color: $DisabledColor;
+  }
+  &:hover:not(:disabled) {
+    border-color: $HoverColor;
+    background-color: $HoverColor;
+  }
+  &:active:not(:disabled) {
+    border-color: $ActiveColor;
+    background-color: $ActiveColor;
+  }
+}
+
+.button_theme_withBorder {
+  background-color: transparent;
+  border-color: $PrimaryColor;
+  color: $PrimaryColor;
+  border-style: solid;
+  &:disabled {
+    opacity: 0.56;
+  }
+  &:hover:not(:disabled) {
+    background-color: rgba(110, 65, 226, 0.04);
+  }
+  &:active:not(:disabled) {
+    background-color: rgba(110, 65, 226, 0.16);
+  }
+}

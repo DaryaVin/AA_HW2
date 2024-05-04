@@ -1,0 +1,75 @@
+@import "./../../Style/generalStyle.scss";
+
+.input {
+  transition: all 0.3s linear;
+  width: 100%;
+  background-color: $WhiteColor;
+  border-radius: 4px;
+  @include defaultShadow;
+  border: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding: 6px 16px;
+  &:not(.input_disabled) {
+    cursor: text;
+  }
+  &.input_disabled {
+    * {
+      opacity: 0.24;
+    }
+  }
+  &:focus-within {
+    .input__label {
+      top: 0;
+      @include paragraph3;
+      padding: 0;
+    }
+  }
+  &:hover:not(.input_disabled),
+  &:focus-within {
+    @include hoverShadow;
+  }
+  &.input_isError {
+    background-color: $RedGirlColor;
+    box-shadow: 0px 4px 12px 0px rgba(255, 195, 195, 0.24),
+      0px 4px 4px 0px rgba(255, 195, 195, 0.04);
+
+    &:hover:not(.input_disabled),
+    &:focus-within {
+      @include inputErrorShadow;
+    }
+  }
+}
+.input__label {
+  @include paragraph2;
+  color: $GrayColor;
+  transition: all 0.3s linear;
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  position: relative;
+  top: 10px;
+}
+.input__label_small {
+  top: 0;
+  @include paragraph3;
+  padding: 0;
+}
+.input__field {
+  @include paragraph3;
+  width: 100%;
+  flex-grow: 1;
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+  transform: scaleX(0);
+  transition: all 0.3s linear;
+  padding: 0;
+  &:focus,
+  &.input__field_filled {
+    @include paragraph2;
+    transform: scaleX(1);
+  }
+}

@@ -1,0 +1,90 @@
+@import "./../../Style/generalStyle.scss";
+
+.checkbox {
+  @include paragraph2;
+  display: flex;
+  color: $BlackColor;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.3s linear;
+  &:hover:not(.checkbox_disable) {
+    .checkbox__field {
+      background-color: $GrayMColor;
+      &[aria-checked="true"] {
+        background-color: $HoverColor;
+      }
+    }
+  }
+}
+.checkbox_disable {
+  opacity: 0.56;
+}
+.checkbox_isError {
+  color: $RedColor;
+  .checkbox__field,
+  .checkbox__field[aria-checked="true"],
+  .checkbox__field[aria-checked="false"] {
+    background-color: $RedGirlColor;
+    border-color: $RedGirlColor;
+  }
+}
+.checkbox__field {
+  border-color: $PrimaryColor;
+  background-color: $PrimaryColor;
+  transition: all 0.3s linear;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  position: relative;
+  display: inline-flex;
+  &::after,
+  &::before {
+    content: "";
+    width: 10px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform-origin: center;
+  }
+  &::after {
+    display: none;
+    height: 3px;
+    border-bottom: 2px solid $WhiteColor;
+    border-left: 2px solid $WhiteColor;
+    transform: translate(-50%, -80%) rotate(-45deg);
+  }
+  &::before {
+    display: flex;
+    height: 1px;
+    border-bottom: 2px solid $WhiteColor;
+    transform: translate(-50%, -50%);
+  }
+
+  &[aria-checked="true"] {
+    border-color: $PrimaryColor;
+    background-color: $PrimaryColor;
+    &::after {
+      display: flex;
+    }
+    &::before {
+      display: none;
+    }
+  }
+  &[aria-checked="false"] {
+    background-color: $WhiteColor;
+    border: 1px solid $GraySColor;
+    &::before {
+      display: none;
+    }
+  }
+  // &:hover:not([aria-disabled="true"]) {
+  //   background-color: $GrayMColor;
+  //   &[aria-checked="true"] {
+  //     background-color: $HoverColor;
+  //   }
+  // }
+  &:active:not([aria-disabled="true"]) {
+  }
+}

@@ -1,0 +1,137 @@
+@import "./../../Style/generalStyle.scss";
+
+.selectWithFilter__mainFieldSlotWrap {
+  transition: all 0.3s linear;
+  width: 100%;
+  cursor: text;
+  padding: 6px 0 6px 16px;
+  position: relative;
+  @include paragraph2;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.selectWithFilter__infoConteiner {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+.selectWithFilter__label {
+  @include paragraph2;
+  color: $GrayColor;
+  transition: all 0.3s linear;
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  position: relative;
+  top: 10px;
+}
+.selectWithFilter__label_small {
+  top: 0;
+  @include paragraph3;
+  padding: 0;
+}
+.selectWithFilter__filterInput {
+  @include paragraph3;
+  flex-grow: 1;
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+  transform: scaleX(0);
+  transition: all 0.3s linear;
+  padding: 0;
+}
+.selectWithFilter__filterInput_inShow {
+  @include paragraph2;
+  transform: scaleX(1);
+}
+.selectWithFilter__value {
+  @include paragraph2;
+  transition: all 0.3s linear;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  gap: 5px;
+  right: 0;
+  width: auto;
+}
+.selectWithFilter__value_small {
+  @include paragraph3;
+}
+.selectWithFilter__valueItem {
+  transform: scaleX(1);
+  transition: all 0.3s linear;
+}
+.selectWithFilter__valueItem_hidden {
+  transform: scaleX(0);
+}
+
+.selectWithFilter__resetBtn {
+  background-color: transparent;
+  box-sizing: border-box;
+  border: 0;
+  font-size: 0;
+  position: relative;
+  width: 32px;
+  &::after,
+  &::before {
+    content: "";
+    width: 16px;
+    height: 2px;
+    background-color: rgba(196, 196, 196, 1);
+    transform-origin: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -1px;
+    margin-left: -8px;
+  }
+  &::after {
+    transform: rotate(-45deg);
+  }
+  &::before {
+    transform: rotate(45deg);
+  }
+}
+.selectWithFilter__optionsList {
+  width: 100%;
+  list-style-type: none;
+  margin: 0;
+  padding: 0 0;
+}
+.select__optionItem {
+  width: 100%;
+}
+.selectWithFilter__optionsLabel {
+  @include paragraph2;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  padding: 8px 16px;
+  position: relative;
+  &:hover,
+  &:focus-within {
+    background-color: $GrayLColor;
+  }
+}
+.selectWithFilter__optionsLabel_checked {
+  &::after {
+    content: "";
+    width: 16px;
+    height: 5px;
+    border-bottom: 2px solid $BlackColor;
+    border-left: 2px solid $BlackColor;
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform-origin: center;
+    transform: translateY(-100%) rotate(-45deg);
+  }
+}
+.selectWithFilter__optionsInput {
+  width: 0;
+  height: 0;
+}

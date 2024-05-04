@@ -1,0 +1,64 @@
+@import "./../../Style/generalStyle.scss";
+
+.select {
+  position: relative;
+  width: 100%;
+  &:hover,
+  &:focus-within {
+    .select__mainFieldSlot {
+      @include hoverShadow;
+    }
+  }
+  padding-bottom: 4px;
+}
+.select__mainFieldSlot {
+  transition: all 0.3s linear;
+  width: 100%;
+  background-color: $WhiteColor;
+  border-radius: 4px;
+  @include defaultShadow;
+  border: 0;
+  padding: 0;
+  padding-right: 50px;
+  position: relative;
+  &::after {
+    content: "";
+    transition: all 0.3s linear;
+    width: 8px;
+    height: 8px;
+    position: absolute;
+    top: 50%;
+    right: 22px;
+    border-left: 2px solid $GrayColor;
+    border-bottom: 2px solid $GrayColor;
+    transform-origin: center;
+    transform: translateY(-60%) rotate(-45deg);
+  }
+}
+.select__mainFieldSlot_open {
+  &::after {
+    transform: translateY(-30%) rotate(-225deg);
+    border-color: $BlackColor;
+  }
+}
+.select__optionsSlot {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  background-color: $WhiteColor;
+  border-radius: 4px;
+  @include defaultShadow;
+  margin: 0;
+  padding: 0;
+  animation: 0.3s optionListAppearance linear;
+}
+@keyframes optionListAppearance {
+  0% {
+    transform: scaleY(0);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}

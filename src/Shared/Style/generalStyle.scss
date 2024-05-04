@@ -1,0 +1,155 @@
+//----------------------- Colors Variables --------------------------//
+$DisabledColor: #e3daf9;
+$PrimaryColor: #6e41e2;
+$HoverColor: #5835b0;
+$ActiveColor: #472c8a;
+$WhiteColor: #ffffff;
+$WhiteSColor: rgba(255, 255, 255, 0.88);
+$GrayMColor: #fafafa;
+$GrayLColor: #f1f1f1;
+$GraySColor: #d4d4d4;
+$GrayColor: rgba(17, 17, 17, 0.48);
+$GrayKColor: #6b6b6b;
+$BlackColor: #111;
+$RedGirlColor: #f9e3e3;
+$RedBoyColor: #f9e3e3;
+$RedColor: #db524e;
+$SuperRedColor: #c7302b;
+$GreenColor: #27ae60;
+$BlueTestsColor: #428bf9;
+
+//----------------------------- Font face ------------------------------//
+@font-face {
+  font-family: Montserrat;
+  src: url("./Assets/Font/Montserrat/Montserrat-VariableFont_wght.ttf");
+}
+@font-face {
+  font-family: Roboto;
+  src: url("./Assets/Font/Roboto/Roboto-Regular.ttf");
+  font-weight: 400;
+}
+@font-face {
+  font-family: Roboto;
+  src: url("./Assets/Font/Roboto/Roboto-Medium.ttf");
+  font-weight: 500;
+}
+@font-face {
+  font-family: Roboto;
+  src: url("./Assets/Font/Roboto/Roboto-Bold.ttf");
+  font-weight: 700;
+}
+//------------------------------- Text Mixins -------------------------//
+
+@mixin h1 {
+  font-family: Montserrat;
+  font-size: 56px;
+  font-weight: 900;
+  line-height: 64px;
+  text-align: left;
+}
+
+@mixin h2 {
+  font-family: Montserrat;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 56px;
+  text-align: left;
+}
+
+@mixin h3 {
+  font-family: Montserrat;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 48px;
+  text-align: left;
+}
+@mixin h4 {
+  font-family: Montserrat;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 40px;
+  text-align: left;
+}
+@mixin h5 {
+  font-family: Montserrat;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+  text-align: left;
+}
+@mixin h6 {
+  font-family: Montserrat;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+  text-align: left;
+}
+
+@mixin paragraph1 {
+  font-family: Roboto;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 28px;
+  text-align: left;
+}
+@mixin paragraph2 {
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+}
+@mixin paragraph3 {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: left;
+}
+@mixin paragraph1-bold {
+  font-family: Roboto;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 28px;
+  text-align: left;
+}
+@mixin paragraph2-bold {
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: left;
+}
+@mixin paragraph3-bold {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 20px;
+  text-align: left;
+}
+
+//--------------------------------- Shadow Mixins -------------------------//
+@mixin defaultShadow {
+  box-shadow: 0px 4px 16px 0px rgba(51, 51, 51, 0.08),
+    0px 4px 4px 0px rgba(51, 51, 51, 0.04);
+}
+
+@mixin inputErrorShadow {
+  box-shadow: 0px 4px 40px 0px rgba(255, 195, 195, 0.24),
+    0px 4px 4px 0px rgba(255, 195, 195, 0.04);
+}
+
+@mixin inputSuccessShadow {
+  box-shadow: 0px 4px 40px 0px rgba(39, 174, 96, 0.24),
+    0px 4px 4px 0px rgba(39, 174, 96, 0.04);
+}
+
+@mixin hoverShadow {
+  box-shadow: 0px 4px 56px 0px rgba(51, 51, 51, 0.16),
+    0px 4px 4px 0px rgba(51, 51, 51, 0.04);
+}
+
+@mixin ActiveShadow {
+  box-shadow: 0px 4px 24px 0px rgba(51, 51, 51, 0.24),
+    0px 4px 4px 0px rgba(51, 51, 51, 0.04);
+}
