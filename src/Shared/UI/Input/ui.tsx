@@ -1,5 +1,6 @@
 import React, { forwardRef, useImperativeHandle, useRef } from "react";
 import "./style.scss";
+import ReactInputMask from "react-input-mask";
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -24,6 +25,7 @@ const InputField = forwardRef(
       disabled = false,
       setValue,
       isError,
+      mask,
       ...props
     }: InputProps,
     ref
@@ -35,6 +37,9 @@ const InputField = forwardRef(
       if (onChange) onChange(e);
       setValue(e.target.value);
     };
+
+    const newMask = mask ? mask.replace(/X/g, "9") : "";
+
     return (
       <label
         className={
@@ -51,17 +56,33 @@ const InputField = forwardRef(
         >
           {label}
         </div>
-        <input
-          {...props}
-          type={type}
-          ref={innerRef}
-          value={value}
-          className={
-            "input__field" + (value !== "" ? " input__field_filled" : "")
-          }
-          onChange={onChangeInputValue}
-          disabled={disabled}
-        />
+
+        {mask ? (
+          <ReactInputMask
+            mask={newMask}
+            inputRef={innerRef}
+            {...props}
+            type={type}
+            value={value}
+            className={
+              "input__field" + (value !== "" ? " input__field_filled" : "")
+            }
+            onChange={onChangeInputValue}
+            disabled={disabled}
+          />
+        ) : (
+          <input
+            {...props}
+            type={type}
+            ref={innerRef}
+            value={value}
+            className={
+              "input__field" + (value !== "" ? " input__field_filled" : "")
+            }
+            onChange={onChangeInputValue}
+            disabled={disabled}
+          />
+        )}
       </label>
     );
   }

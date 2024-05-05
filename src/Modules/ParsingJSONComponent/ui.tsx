@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { FileInput, FormJSONType } from "../../Shared";
+import "./style.scss";
+import { Button, FileInput, FormJSONType } from "../../Shared";
 
 const parseJsonFile = async (file: File): Promise<FormJSONType> => {
   return new Promise((resolve, reject) => {
@@ -42,6 +43,7 @@ export const ParsingJSONComponent = ({
   };
   useEffect(() => {
     if (fileList) parseFileList(fileList);
+    if (fileList === null) setDataFormsJSON([]);
   }, [fileList]);
 
   useEffect(() => {
@@ -56,11 +58,20 @@ export const ParsingJSONComponent = ({
   }, [indexItemForDelete]);
 
   return (
-    <FileInput
-      fileList={fileList}
-      setFileList={setFileList}
-      formats="application/json"
-      multiple
-    />
+    <div className="ParsingJSONComponent">
+      <FileInput
+        fileList={fileList}
+        setFileList={setFileList}
+        formats="application/json"
+        multiple
+      />
+      <Button
+        label={"Reset"}
+        className="ParsingJSONComponent__btnReset"
+        onClick={() => {
+          setFileList(null);
+        }}
+      />
+    </div>
   );
 };
