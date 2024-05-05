@@ -5,7 +5,7 @@ import { FileInput } from "../Files/ui";
 import { ValidationMessage } from "../ValidationMessage/ui";
 
 interface FilesWithValidationProps {
-  id: string;
+  id?: string;
   label: string;
   required?: boolean;
   setIsValid?: (val: boolean) => void;
@@ -13,12 +13,16 @@ interface FilesWithValidationProps {
   formats?: string;
   maxSize?: number;
   maxCount?: number;
+  updateVal?: (v: unknown) => void;
+  generalDirty?: boolean;
 }
 
 export const FilesWithValidation = ({
   required,
   setIsValid,
   multiple,
+  updateVal,
+  generalDirty,
   ...props
 }: FilesWithValidationProps) => {
   const [value, setValue] = useState<FileList | null>(null);
@@ -31,7 +35,15 @@ export const FilesWithValidation = ({
 
   useEffect(() => {
     if (setIsValid) setIsValid(validation.isValid);
-  }, [validation.isValid]);
+  }, [validation.isValid, generalDirty]);
+
+  useEffect(() => {
+    if (generalDirty) validation.setIsDirty(true);
+  }, [generalDirty]);
+
+  useEffect(() => {
+    if (updateVal) updateVal(value);
+  }, [value]);
 
   return (
     <div className="colorWithValidation">
@@ -40,7 +52,7 @@ export const FilesWithValidation = ({
         setFileList={setValue}
         className="ColorWithValidation__input"
         {...props}
-        isError={validation.isDirty && !validation.isValid}
+        isError={(validation.isDirty || generalDirty) && !validation.isValid}
         onDirty={validation.setIsDirty}
         multiple={multiple}
       />

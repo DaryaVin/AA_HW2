@@ -5,12 +5,25 @@ import { CreatingForm, ParsingJSONComponent } from "./Modules";
 
 function App() {
   const [parseResult, setParseResult] = useState<FormJSONType[]>([]);
+  const [indexItemForDelete, setIndexItemForDelete] = useState<number[]>([]);
   return (
     <div className="App">
-      <ParsingJSONComponent setDataFormsJSON={setParseResult} />
+      <ParsingJSONComponent
+        setDataFormsJSON={setParseResult}
+        indexItemForDelete={indexItemForDelete}
+        setIndexItemForDelete={setIndexItemForDelete}
+      />
       <ul className="App__formsList">
-        {parseResult.map((formItem) => {
-          return <CreatingForm key={formItem.form_name} formItem={formItem} />;
+        {parseResult.map((formItem, index) => {
+          return (
+            <CreatingForm
+              key={formItem.form_name}
+              formItem={formItem}
+              onClickDelFormBtn={() => {
+                setIndexItemForDelete([...indexItemForDelete, index]);
+              }}
+            />
+          );
         })}
       </ul>
     </div>

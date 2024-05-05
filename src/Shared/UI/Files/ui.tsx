@@ -163,8 +163,8 @@ const Files = forwardRef(
           )}
           {(!fileList || fileList?.length === 0) &&
             errorMessage.length === 0 && (
-              <p className="fileInput__discription">
-                {"Для загрузки доступны файлы " +
+            <p className="fileInput__discription">
+              {"Для загрузки доступны файлы " +
                   (formats ? formats + " формата" : "") +
                   (maxSize
                     ? " максимального размера в " +
@@ -174,8 +174,8 @@ const Files = forwardRef(
                   (maxCount && multiple
                     ? ", максимальное количество " + maxCount
                     : "")}
-              </p>
-            )}
+            </p>
+          )}
           {fileList && fileList?.length !== 0 && (
             <ul className="fileInput__fileList">
               {Array.from(fileList).map((file, index) => {

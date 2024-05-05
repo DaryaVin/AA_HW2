@@ -5,9 +5,9 @@ import { Input } from "../Input/ui";
 import { ValidationMessage } from "../ValidationMessage/ui";
 
 interface InputWithValidationProps {
-  id: string;
+  id?: string;
   type?: "password" | "text" | "textarea";
-  label?: string;
+  label: string;
   required?: boolean;
   placeholder?: string;
   maxlength?: number;
@@ -16,6 +16,8 @@ interface InputWithValidationProps {
   mask?: string;
   className?: string;
   setIsValid?: (val: boolean) => void;
+  updateVal?: (v: unknown) => void;
+  generalDirty?: boolean;
 }
 
 export const InputWithValidation = ({
@@ -24,6 +26,8 @@ export const InputWithValidation = ({
   minlength,
   pattern,
   setIsValid,
+  updateVal,
+  generalDirty,
   ...props
 }: InputWithValidationProps) => {
   const [value, setValue] = useState<string>("");
@@ -36,9 +40,19 @@ export const InputWithValidation = ({
       pattern,
     },
   });
+
   useEffect(() => {
     if (setIsValid) setIsValid(validation.isValid);
-  }, [validation.isValid]);
+  }, [validation.isValid, generalDirty]);
+
+  useEffect(() => {
+    if (generalDirty) validation.setIsDirty(true);
+  }, [generalDirty]);
+
+  useEffect(() => {
+    if (updateVal) updateVal(value);
+  }, [value]);
+
   return (
     <div className="inputWithValidation">
       <Input
@@ -49,7 +63,7 @@ export const InputWithValidation = ({
           validation.setIsDirty(true);
         }}
         {...props}
-        isError={validation.isDirty && !validation.isValid}
+        isError={(validation.isDirty || generalDirty) && !validation.isValid}
       />
       <ValidationMessage {...validation} />
     </div>

@@ -18,9 +18,13 @@ const parseJsonFile = async (file: File): Promise<FormJSONType> => {
 
 interface ParsingJSONComponentProps {
   setDataFormsJSON: (val: FormJSONType[]) => void;
+  indexItemForDelete?: number[];
+  setIndexItemForDelete?: (val: number[]) => void;
 }
 export const ParsingJSONComponent = ({
   setDataFormsJSON,
+  indexItemForDelete,
+  setIndexItemForDelete,
 }: ParsingJSONComponentProps) => {
   const [fileList, setFileList] = useState<FileList | null>(null);
 
@@ -39,6 +43,18 @@ export const ParsingJSONComponent = ({
   useEffect(() => {
     if (fileList) parseFileList(fileList);
   }, [fileList]);
+
+  useEffect(() => {
+    if (indexItemForDelete && indexItemForDelete.length !== 0 && fileList) {
+      const newFiles = new DataTransfer();
+      for (let i = 0; i < fileList.length; i++) {
+        if (!indexItemForDelete.includes(i)) newFiles.items.add(fileList[i]);
+      }
+      setFileList(newFiles.files);
+      if (setIndexItemForDelete) setIndexItemForDelete([]);
+    }
+  }, [indexItemForDelete]);
+
   return (
     <FileInput
       fileList={fileList}
