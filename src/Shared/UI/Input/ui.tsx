@@ -12,6 +12,10 @@ export interface InputProps
   value: string;
   isError?: boolean;
   setValue: (val: string) => void;
+  onChange?: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+  onBlur?: () => void;
 }
 
 const InputField = forwardRef(
@@ -26,14 +30,20 @@ const InputField = forwardRef(
       setValue,
       isError,
       mask,
+      onBlur,
       ...props
     }: InputProps,
     ref
   ) => {
     const innerRef = useRef<HTMLInputElement>(null);
-    useImperativeHandle(ref, () => innerRef.current);
+    const innerTextAreaRef = useRef<HTMLTextAreaElement>(null);
+    useImperativeHandle(ref, () =>
+      type === "textarea" ? innerTextAreaRef : innerRef.current
+    );
 
-    const onChangeInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onChangeInputValue = (
+      e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
       if (onChange) onChange(e);
       setValue(e.target.value);
     };
@@ -56,8 +66,18 @@ const InputField = forwardRef(
         >
           {label}
         </div>
-
-        {mask ? (
+        {type === "textarea" ? (
+          <textarea
+            ref={innerTextAreaRef}
+            value={value}
+            className={
+              "input__field" + (value !== "" ? " input__field_filled" : "")
+            }
+            onChange={onChangeInputValue}
+            disabled={disabled}
+            onBlur={onBlur}
+          />
+        ) : mask ? (
           <ReactInputMask
             mask={newMask}
             inputRef={innerRef}
@@ -69,6 +89,7 @@ const InputField = forwardRef(
             }
             onChange={onChangeInputValue}
             disabled={disabled}
+            onBlur={onBlur}
           />
         ) : (
           <input
@@ -81,6 +102,7 @@ const InputField = forwardRef(
             }
             onChange={onChangeInputValue}
             disabled={disabled}
+            onBlur={onBlur}
           />
         )}
       </label>
